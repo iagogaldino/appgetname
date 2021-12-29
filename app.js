@@ -34,7 +34,7 @@ app.get('/sendEmail', (req, res) => {
   sendEmail(query.phone);
 });
 
-app.listen(9090);
+app.listen(process.env.PORT || 8080);
 console.log(`${pjson.name} server started`);
 
 

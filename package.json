@@ -8,6 +8,7 @@
     "npm": "6.4.1"
   },
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "nodemailer": "^6.7.2"
   }
 }
