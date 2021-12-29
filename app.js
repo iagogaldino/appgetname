@@ -4,9 +4,13 @@
 const express = require('express');
 const path = require('path');
 var pjson = require('./package.json');
+const fs = require('fs');
+const crypto = require('crypto');
+
 const nomeApp = process.env.npm_packag_name;
 const app = express();
 const nodemailer = require('nodemailer');
+const { createInflate } = require('zlib');
 const transporter = nodemailer.createTransport({
   service: 'hotmail',
   auth: {
@@ -22,16 +26,16 @@ const mailOptions = {
 };
 app.use(express.static(`${__dirname}/public/`));
 
-app.get('/', (req, res) => {
-  // sendEmail('User visit!');
-  res.sendFile(path.join(`${__dirname}/public/index.html`));
-});
-
 app.get('/sendEmail', (req, res) => {
   const { query } = req;
   console.log(query)
   res.send(query);
   sendEmail(query.phone);
+});
+
+app.get('/file', (req, res) => {
+  createFile(':D');
+  res.send('createFile');
 });
 
 app.listen(process.env.PORT || 8080);
@@ -46,5 +50,15 @@ sendEmail = function (text) {
     } else {
       console.log('Email sent: ' + info.response);
     }
+  });
+}
+
+createFile = function (value) {
+  let d = new Date();
+  const h = d.getDate() + '/' + d.getMonth() + '/' + d.getFullYear() + '::' + d.getHours() +':'+ d.getMinutes();
+  var stream = fs.createWriteStream("public/assets/"+d+".txt");
+  stream.once('open', function(fd) {
+    stream.write(h);
+    stream.end();
   });
 }
