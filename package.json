@@ -1,5 +1,5 @@
 {
-  "name": "bff-act-challenge",
+  "name": "bff-get-number",
   "scripts": {
     "start": "node app.js"
   },

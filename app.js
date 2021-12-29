@@ -22,7 +22,7 @@ var transporter = nodemailer.createTransport({
   };
 app.use(express.static(`${__dirname}/public/`));
 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
     sendEmail('User visit!');
     res.sendFile(path.join(`${__dirname}/public/index.html`));
 });
